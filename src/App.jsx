@@ -84,9 +84,7 @@ function App() {
           <a href="#events" className="hover:text-cyan-400">
             Events
           </a>
-          <a href="#newsletter" className="hover:text-cyan-400">
-            Newsletter
-          </a>
+          
         </motion.nav>
 
         <motion.button
@@ -102,7 +100,7 @@ function App() {
       {/* HERO */}
       <section
         id="home"
-        className="max-w-6xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12"
+        className="max-w-full mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12"
       >
         <div>
           <motion.h1 {...fadeUp} className="text-5xl font-extrabold">
@@ -133,19 +131,25 @@ function App() {
           <div className="mt-8 grid grid-cols-3 gap-4">
             <Feature icon={<Users />} title="Community" />
             <Feature icon={<Sparkles />} title="Events" />
-            <Feature icon={<Mail />} title="Newsletter" />
+          
           </div>
         </div>
 
         {/* code card */}
-        <motion.div {...fadeUp} className="relative">
-          <pre className="p-6 bg-black/40 border border-white/10 rounded-3xl">
-            {`// sample code
+       <motion.div {...fadeUp} className="relative px-3 sm:px-0">
+  <pre className="w-full max-w-3xl mx-auto
+                  p-3 sm:p-6 lg:p-8
+                  bg-black/40 border border-white/10 rounded-3xl
+                  overflow-x-auto
+                  whitespace-pre-wrap break-words
+                  text-xs sm:text-sm lg:text-base">
+{`// sample code
 function joinCommunity(name) {
   return name + " grows with FutureStackk 🚀";
 }`}
-          </pre>
-        </motion.div>
+  </pre>
+</motion.div>
+
       </section>
 
       {/* TEAM */}
