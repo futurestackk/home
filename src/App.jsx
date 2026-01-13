@@ -47,7 +47,7 @@ function App() {
       form,
       "fE9E8PNEUOYwdsJ5T"
     ) .then(() => notify("email send success to admin"))
-  .catch(err => notify(err);
+  .catch(err => notify(err));
 
    
     setOpen(false);
