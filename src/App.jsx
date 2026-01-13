@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from "react";
 import { ref, onValue } from "firebase/database";
-import { db } from "./Firebase";
+import { db } from "./Firebase.jsx";
 
 
 const fadeUp = {
