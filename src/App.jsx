@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { Users, Sparkles, Mail, ChevronRight } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
+import { ref, onValue } from "firebase/database";
+import { db } from "./Firebase";
 
 
 const fadeUp = {
@@ -40,16 +43,18 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    emailjs.send(
-      "service_zcmex0a",
-      "template_ttk611p",
-      form,
-      "fE9E8PNEUOYwdsJ5T"
-    ) .then(() => notify("email send success to admin"))
-  .catch(err => notify(err));
-
-   
+emailjs
+  .send(
+    "service_xcw3r6p",
+    "template_ttk611p",
+    form,
+    "fE9E8PNEUOYwdsJ5T"
+  )
+  .then(() => notify("Email sent successfully"))
+  .catch((err) => {
+    console.log(err);
+    notify("Email failed: " + err.text);
+  });
     setOpen(false);
   };
 
@@ -303,49 +308,40 @@ export default App;
 /* ================= MEMBERS SECTION ================= */
 
 function Members() {
-  const people = [
-    {
-      name: "Khagendra Rajbanshi",
-      role: "Frontend Developer",
-      img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
-    },
-    {
-      name: "sudeep luitel",
-      role: "UI / UX Designer",
-      img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
-    },
-    {
-      name: "sabin ",
-      role: "Backend Developer",
-      img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
-    },
-    {
-      name: "Diwakar khanal",
-      role: "Mobile App Developer",
-      img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
-    },
-    {
-      name: "Rudhra",
-      role: "AI / ML Engineer",
-      img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
-    },
-    {
-      name: "Jiban Tajpuriya",
-      role: "Community Lead",
-      img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
-    },
-  ];
+ const [people, setPeople] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const membersRef = ref(db, "members");
+
+    const unsubscribe = onValue(membersRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (data) {
+        const list = Object.values(data); // convert object → array
+        setPeople(list);
+      } else {
+        setPeople([]);
+      }
+
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) return <p className="text-center">Loading members...</p>;
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20" id="members">
-      <motion.h2 {...fadeUp} className="text-4xl font-bold mb-10 text-center">
+     <section className="max-w-7xl mx-auto px-6 py-20" id="members">
+      <motion.h2 className="text-4xl font-bold mb-10 text-center">
         ⭐ Core Team Members
       </motion.h2>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
         {people.map((p, i) => (
           <motion.div
-            key={p.name}
+            key={i}
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: i * 0.08 }}
@@ -361,7 +357,13 @@ function Members() {
               transition={{ duration: 3, repeat: Infinity }}
             />
 
-            <h3 className="text-xl font-semibold mt-4">{p.name}</h3>
+            <h3 className="text-xl font-semibold mt-4">{p.name}
+  {p.tick && (
+    <span className="ml-2 relative inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.9)]">
+      <span className="absolute inline-block w-2 h-3 border-r-2 border-b-2 border-white rotate-45"></span>
+    </span>
+  )}
+            </h3>
             <p className="text-gray-400">{p.role}</p>
           </motion.div>
         ))}
