@@ -1,11 +1,26 @@
-# ignore everything
-*
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# but not these files/folders
-!.gitignore
-!dist/
-!docs/
+node_modules
+public 
+src
+README.md
+dist-ssr
+*.local
 
-# inside dist, allow everything
-dist/**
-docs/**
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
