@@ -42,13 +42,14 @@ function App() {
     e.preventDefault();
 
     emailjs.send(
-      "service_xxxxxx",
-      "template_xxxxxx",
+      "service_zcmex0a",
+      "template_ttk611p",
       form,
-      "public_key_xxxxxx"
-    );
+      "fE9E8PNEUOYwdsJ5T"
+    ) .then(() => console.log("success"))
+  .catch(err => console.log(err));
 
-    notify("email sent successfully");
+   
     setOpen(false);
   };
 
@@ -267,12 +268,21 @@ function joinCommunity(name) {
                 placeholder="Your email"
                 required
               />
+                 <input
+                name="role"
+                onChange={handleChange}
+                className="w-full bg-gray-700 px-3 py-2 rounded"
+                placeholder="Role . eg: backend"
+                required
+              />
               <textarea
                 name="message"
                 onChange={handleChange}
                 className="w-full bg-gray-700 px-3 py-2 rounded"
                 placeholder="Your message"
               />
+               
+            
               <button className="w-full bg-cyan-500 py-2 rounded-lg">
                 Submit
               </button>
