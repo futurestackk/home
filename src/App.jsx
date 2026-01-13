@@ -315,7 +315,7 @@ function Members() {
       img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
     },
     {
-      name: "sabin subedi",
+      name: "sabin ",
       role: "Backend Developer",
       img: "https://cdn-icons-png.flaticon.com/512/11789/11789135.png",
     },
