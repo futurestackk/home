@@ -46,8 +46,8 @@ function App() {
       "template_ttk611p",
       form,
       "fE9E8PNEUOYwdsJ5T"
-    ) .then(() => console.log("success"))
-  .catch(err => console.log(err));
+    ) .then(() => notify("email send success to admin"))
+  .catch(err => notify(err);
 
    
     setOpen(false);
